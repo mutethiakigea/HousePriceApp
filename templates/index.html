@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: white; /* Set background outside the frame to white */
+            color: white; /* Text color for all text */
+        }
+        .container {
+            width: 75%; /* Adjusted width for the container */
+            max-width: 600px;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: navy;
+            position: relative; /* Position relative for mobile frame */
+            border: 2px solid white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        .mobile-frame {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 75%; /* Adjusted width for the mobile frame */
+            max-width: 350px; /* Adjust the max-width as needed */
+            padding: 20px;
+            border: 2px solid white;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            background-color: navy;
+            z-index: -1; /* Behind the container */
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid white;
+            background-color: navy;
+            color: white;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: white;
+            color: navy;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        p {
+            margin-top: 20px;
+        }
+        a {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Mobile frame -->
+        <div class="mobile-frame"></div>
+        
+        <h1>House Price Prediction</h1>
+
+        {% if prediction is not defined %}
+        <form action="/predict" method="post">
+            <label for="BsmtFullBath">BsmtFullBath:</label>
+            <input type="text" name="BsmtFullBath" required><br>
+
+            <label for="BsmtHalfBath">BsmtHalfBath:</label>
+            <input type="text" name="BsmtHalfBath" required><br>
+
+            <label for="FullBath">FullBath:</label>
+            <input type="text" name="FullBath" required><br>
+
+            <label for="HalfBath">HalfBath:</label>
+            <input type="text" name="HalfBath" required><br>
+
+            <label for="BedroomAbvGr">BedroomAbvGr:</label>
+            <input type="text" name="BedroomAbvGr" required><br>
+
+            <label for="KitchenAbvGr">KitchenAbvGr:</label>
+            <input type="text" name="KitchenAbvGr" required><br>
+
+            <button type="submit">Predict</button>
+        </form>
+        {% else %}
+        <p>Predicted Sale Price: ${{ prediction }}</p>
+        <a href="/">Go back to the input form</a>
+        {% endif %}
+    </div>
+</body>
+</html>
